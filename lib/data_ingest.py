@@ -1,14 +1,6 @@
-import configReader
+from lib import config_Reader
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType, FloatType
 
-
-from pyspark.sql import SparkSession
-
-# Create Spark session
-spark = SparkSession.builder \
-    .appName("MySparkApp") \
-    .master("local[*]") \
-    .getOrCreate()
 
 
 
@@ -26,9 +18,10 @@ def order_schema():
     return schema
 
 def read_orders (env,spark):
-    filed=configReader.get_app_config(env)
+    filed=config_Reader.get_app_config(env)
     filepath=filed["data.file.path"]
     return spark.read.format("csv").option("header",True).schema(order_schema()).load(filepath)
+
 
 
 

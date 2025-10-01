@@ -1,15 +1,11 @@
-from pyspark.sql import SparkSession
+
 from pyspark.sql.functions import * 
 from pyspark.sql.window import Window
 
-import data_ingest
-import data_cleaning
+from lib import data_ingest, data_cleaning
 
-# Create Spark session
-spark = SparkSession.builder \
-    .appName("MySparkApp") \
-    .master("local[*]") \
-    .getOrCreate()
+
+
 
 
 
@@ -87,9 +83,5 @@ def revenue_by_month(env,spark):
      wdf=df3.withColumn("lag",lag("trpm",1,0).over(w))
      wdf1=wdf.withColumn("perchange",((col("trpm")-col("lag"))/col("trpm")))
      return wdf1
-
-
-
-
 
 
