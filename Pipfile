@@ -4,6 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+pyspark = "*"
+pandas = "*"
+matplotlib = "*"
 seaborn = "*"
 
 [dev-packages]
